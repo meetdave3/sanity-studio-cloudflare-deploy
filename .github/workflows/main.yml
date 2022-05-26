@@ -19,7 +19,7 @@ jobs:
   #         npm run build
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    # needs: build
     name: Deploy
     steps:
       - uses: actions/checkout@v3
