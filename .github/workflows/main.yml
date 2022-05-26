@@ -24,16 +24,15 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy
     steps:
-      # - uses: actions/checkout@v3
-      #   run: |
-      #     npm i
-      #     npm run build
-      # - uses: actions/csheckout@v3
+      - uses: actions/checkout@v3
+        run: |
+          npm i
+          npm run build
+      - uses: actions/csheckout@v3
       - name: Publish
         uses: cloudflare/wrangler-action@2.0.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: |
-            npm run build
             pages publish dist --project-name=sanity-studio --commit-dirty=true
