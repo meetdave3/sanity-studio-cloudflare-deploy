@@ -12,13 +12,13 @@ jobs:
     name: Build and deploy
     steps:
         uses: actions/checkout@v3
-      - name: Build
+        name: Build
         run: |
             npm ci
             npm run build
       
         uses: cloudflare/wrangler-action@2.0.0
-      - name: Publish
+        name: Publish
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
