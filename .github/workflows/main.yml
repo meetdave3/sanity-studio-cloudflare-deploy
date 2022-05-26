@@ -6,13 +6,10 @@ on:
   pull_request:
     branches: [ main ]
 
-  workflow_dispatch:
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # needs: build
-    name: Deploy
+    name: Build and deploy
     steps:
       - uses: actions/checkout@v3
       - name: Build
