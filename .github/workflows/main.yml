@@ -1,8 +1,6 @@
 name: Deploy Sanity Studio to Cloudflare Pages
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
   pull_request:
@@ -11,16 +9,28 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    name: Deploy
     steps:
-      - uses: actions/checkout@v2
-      - name: Publish
-        uses: cloudflare/wrangler-action@2.0.0
+      - uses: actions/checkout@v3
+      - name: Run a multi-line script
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
           npm i
           npm run build
           wrangler pages publish dist/
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   name: Deploy
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Publish
+  #       uses: cloudflare/wrangler-action@2.0.0
+  #       with:
+  #         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  #       run: |
+  #         npm i
+  #         npm run build
+  #         wrangler pages publish dist/
