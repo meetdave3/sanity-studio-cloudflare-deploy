@@ -19,6 +19,7 @@ jobs:
         run: |
             npm ci
             npm run build
+            git stash
       - name: Publish
       
         uses: cloudflare/wrangler-action@2.0.0
@@ -26,4 +27,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: |
-            pages publish dist --project-name=sanity-studio --commit-dirty=true
+            pages publish dist --project-name=sanity-studio
