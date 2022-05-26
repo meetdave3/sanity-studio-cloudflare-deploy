@@ -11,14 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and deploy
     steps:
-      - uses: actions/checkout@v3
       - name: Build
+      - uses: actions/checkout@v3
         run: |
             npm ci
             npm run build
       
-        uses: cloudflare/wrangler-action@2.0.0
       - name: Publish
+        uses: cloudflare/wrangler-action@2.0.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
