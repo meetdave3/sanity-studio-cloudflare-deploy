@@ -21,7 +21,7 @@ jobs:
     name: Deploy
     steps:
       - uses: actions/checkout@v3
-        command: |
+        run: |
           npm i
           npm run build
       - name: Publish
