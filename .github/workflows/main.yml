@@ -10,7 +10,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Build and deploy
-    uses: actions/checkout@v3
+    - uses: actions/checkout@v3
     steps:
       - name: Build
         run: |
