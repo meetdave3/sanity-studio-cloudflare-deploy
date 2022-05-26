@@ -12,14 +12,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - name: Run a multi-line script
+      - uses: actions/checkout@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        run: |
-          npm i
-          npm run build
-          wrangler pages publish dist/
+      run: |
+        npm i
+        npm run build
+        wrangler pages publish dist/
 
   # deploy:
   #   runs-on: ubuntu-latest
