@@ -9,20 +9,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Build
-        run: |
-          npm i
-          npm run build
+  # build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Build
+  #       run: |
+  #         npm i
+  #         npm run build
   deploy:
     runs-on: ubuntu-latest
     needs: build
     name: Deploy
     steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: |
+            npm i
+            npm run build
       - name: Publish
+      
         uses: cloudflare/wrangler-action@2.0.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
