@@ -1,5 +1,5 @@
-Github actions builds the project and uses the Wrangler CLI to upload the dist artefacts to Cloudflare Pages
+Deploy Sanity Studio to Cloudflare Pages using Github Actions
 
-Required secrets: 
+Add the following secrets. Path: github.com/username/reponame/settings/secrets/actions: 
   - `CLOUDFLARE_ACCOUNT_ID`
   - `CLOUDFLARE_API_TOKEN`
