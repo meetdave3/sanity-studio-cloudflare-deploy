@@ -2,21 +2,19 @@ name: Deploy Sanity Studio to Cloudflare Pages
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
-  deploy:
+  deploy-to-prod:
+    if: github.ref_name == 'main'
     runs-on: ubuntu-latest
-    name: Build and deploy
+    name: Build and deploy to production
     steps:
       - uses: actions/checkout@v3
       - name: Build
         run: |
             npm ci
             npm run build
-      
+
       - name: Publish
         uses: cloudflare/wrangler-action@2.0.0
         with:
@@ -24,3 +22,22 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: |
             pages publish dist --project-name=sanity-studio
+
+  deploy-to-staging:
+    if: github.ref_name == 'staging'
+    runs-on: ubuntu-latest
+    name: Build and deploy to staging
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: |
+            npm ci
+            npm run build
+
+      - name: Publish
+        uses: cloudflare/wrangler-action@2.0.0
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: |
+            pages publish dist --project-name=sanity-studio-staging
